@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp" ng-controller="MyController">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 minium-scale=100% max-scale=100%">
+    <script src="angular.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <title>PosFile</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="qrcode.min.js"></script>
+    <script src="ctrl.js"></script>
+    <script>
+        // pasar a angulajs
+        function abrirXML() {
+            var file = document.getElementById("archivos").click();
+        }
+        function abrirLogo() {
+            var file = document.getElementById("inputFile1").click();
+        }
+        function piedepagina() {
+            var file = document.getElementById("piePagina").click();
+        }
+        function imprimirfinal() {
+            var file = document.getElementById("btnImprimir").click();
+        }
+
+    </script>
+
+
+</head>
+
+<body class="cuerpo">
+    <!-- Encabezado -->
+    <div id="fila1" class="row encabezado oculto-impresion">
+        <div>
+            <img class="m-1" src="iconos/logo.png" alt="PosFile">
+            <a class="btn btn-primary float-end m-1" href="https://posfile.com">Más sobre
+                PosFile</a>
+        </div>
+    </div>
+    <div class="row p-3" id="fila2">
+        <div class="col-xl-2 col-lg-2 col-12 botones centrado m-3 oculto-impresion">
+            <div class="">
+                <div class="" onclick="abrirXML()">
+                    <input type="file" accept=".xml" id="archivos"
+                        onchange="angular.element(this).scope().SelectFile(event)">
+                    <img class="iconos" src="iconos/carga-de-archivos.png" alt="">
+                    <label class="">Cargar XML</label><br>
+                </div>
+                <div class="" onclick="abrirLogo()">
+                    <input id="inputFile1" type="file" accept=".png,.jpg,.jpeg"
+                        onchange="angular.element(this).scope().addIMG(event)">
+                    <img class="iconos" src="iconos/livejournal.png" alt="">
+                    <label class="">Cargar Logo</label><br>
+                </div>
+                <div class="" onclick="piedepagina()">
+                    <img class="iconos" src="iconos/pie-de-pagina-del-documento.png" alt="">
+                    <label class="">Pie de página</label><br>
+
+                </div>
+                <div class="" onclick="imprimirfinal()">
+                    <button id="btnImprimir" style="display: none;"></button>
+                    <img class="iconos" src="iconos/impresora.png" alt="">
+                    <label class="">ImprimirL</label><br>
+                </div>
+                <div class="">
+                    <img class="iconos" src="iconos/libro-de-instrucciones.png" alt=""> <label
+                        class="">Instrucciones</label><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl col-lg col-12 vista centrado m-3">
+            <div class="oculto-impresion">
+                <h1 class="titulo">Convertir y personalizar factura electrónica XML Gratis</h1>
+                <h4 class="titulo4">Formato</h4>
+                <div class="btn-group btn-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary border-primary" id="labelc1" onclick="verificar()">
+                        <input type="radio" id="botonFormat" name="options" value="option1" checked="true">Ticket
+                    </label>
+                    <label class="btn btn-default border-primary" id="labelc2" onclick="verificar()">
+                        <input type="radio" id="botonFormat2" name="options" value="option2" checked="false"> Carta
+                    </label>
+                </div>
+            </div>
+            <div id="imprimible" class="centrado desborde">
+                <link rel="stylesheet" href="estilos.css">
+                <link rel="stylesheet" href="style.css">
+                <div id="ticket" class="ticket desborde">
+                    <div style="align-items: center;">
+                        <img width="200" height="100" id="img1" alt="branding logo" ng-src="{{SRCimagen}}"><br>
+                    </div>
+                    <p class="centrado">
+                        <span id="empresa">{{nombreCom}}</span><br>
+                        <span id="direccion">{{direccionF}}</span><br>
+                        <!-- <span id="municipio"></span><br> -->
+                        <span id="nitempresa">{{nit}}</span><br>
+                        <span id="empresa">{{nombreEmi}}</span><br><br>
+                        <span id="tipoFact">{{fact}}</span><br>
+                        <b><span id="Nof">{{numbFac}}</span></b>
+                        <span id="serie">{{serieFact}}</span><br>
+                        ---------- DATOS DEL COMPRADOR ----------<br>
+                        NIT: <span id="nit2">{{nitRecep}}</span><br>
+                        NOMBRE: <span id="spNombre">{{nombreRecep}}</span><br>
+                        <span id="spDireccion">{{direccion2}}</span>
+                        <b>FECHA: </b><span id="spdate">{{fecha|date:"short"}}</span><br>
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="cantidad">#</th>
+                                <th class="producto">Producto</th>
+                                <th class="precio">Precio</th>
+                                <th class="precio">Desc</th>
+                                <th class="precio">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in x">
+                                <td align="center">{{x.cantidad}}</td>
+                                <td align="left">{{x.descripcion}}</td>
+                                <td align="center">{{x.precioUnitario}}</td>
+                                <td align="center">{{x.descuento}}</td>
+                                <td align="right">{{x.precio}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table width="100%" style="border-top: 0px !important;">
+                        <tr style="border-top: 0px !important;" id="trtotsinc">
+                            <td style="padding-left: 10px;border-top: 0px !important;">Total: </td>
+                            <td align="right"><span>{{grantotal}}</span></td>
+                        </tr>
+                    </table>
+                    <p class="centrado">
+                        <span id="spregimen">{{regimen1}}</span><br>
+                        <span id="spregimen2">{{regimen2}}</span><br>
+                        <span style="font-size: 12px" id="spguid">{{numbAut}}</span><br>
+                        <span id="spcerti">{{nombreCert+" NIT: "+nitCert}}</span><br>
+                        <span id="sptextopie" style="font-size: 12px">{{textopieF}}</span><br>
+                        Supported by www.posfile.com<br>
+                    </p>
+                </div>
+                <div id="pages" class="page desborde">
+                    <br>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="25%">
+                                    <table width="100%" cellpadding="0" cellspacing="">
+                                        <tr>
+                                            <td><img id="imgLogo" ng-src="{{SRCimagen}}" width="170px" alt="[logo]"
+                                                    align="left"><br></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td align="center" colspan="2" width="45%">
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td colspan="3" align="center">
+                                                <b style="font-family:arial;font-size:16px;">
+                                                    <div id="divempresa" class="border-all thecolorini">
+                                                        <span id="empresa">{{nombreCom}}</span>
+                                                    </div>
+                                                </b>
+                                                <br><span id="nitempresa">{{nit}}</span><br>
+                                                <span id="direccion">{{direccionF}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="20%" align="center">
+                                    <div class="border-all-2 thecolorbord">
+                                        <span>{{fact}}</span><br>
+                                        <span style="font-size: 7pt;" id="spNof">{{numbFac}}</span>
+                                        <table>
+                                            <tr>
+                                                <td><span style="font-size: 7pt;" id="spserie">{{serieFact}}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <br><br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left"></td>
+                                <td colspan="2" align="center"></td>
+                                <td align="center" style="border-width: 1px; border-collapse:collapse; ">
+                                    <div id="divfecha" class="border-all thecolorini">
+                                        <b>FECHA: </b><span id="spdate">{{fecha |date:'shortDate'}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="65%" class="border-all-2 thecolorbord">
+                            <tr>
+                                <td width="40%">
+                                    <b>NOMBRE: </b><span id="spNombre">{{nombreRecep}}</span><br><br>
+                                    <b>DIRECCIÓN: </b><span id="spDireccion">{{direccion2}}</span><br><br>
+                                </td>
+                                <td width="10%"><b>NIT: </b><span id="spnit">{{nitRecep}}</span><br><br><span
+                                        id="clitel"></span>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br><br>
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="font-size: 8pt;">
+                            <thead>
+                                <tr>
+                                    <th width="10%" class="hcenter c">
+                                        <b>
+                                            <div id="c" width="20%" class="bordertop-left thecolorini"> CANTIDAD
+                                            </div>
+                                        </b>
+                                    </th>
+                                    <th width="60%" class="hcenter d">
+                                        <b>
+                                            <div id="d" width="20%" class="border-line thecolorini"> DESCRIPCIÓN
+                                            </div>
+                                        </b>
+                                    </th>
+                                    <th width="15%" class="hcenter p">
+                                        <b>
+                                            <div id="p" width="50%" class="border-line thecolorini"> P. UNITARIO
+                                            </div>
+                                        </b>
+                                    </th>
+                                    <th class="hcenter t" width="15%">
+                                        <b>
+                                            <div id="t" width="20%" class="bordertop-rigth thecolorini">TOTAL
+                                            </div>
+                                        </b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="x in x">
+                                <td height="6%" class="thecolorbordonlyl" valign="top" align="center">
+                                    {{x.cantidad}}
+                                </td>
+                                <td class="thecolorbordtyb" valign="top">{{x.descripcion}}</span></td>
+                                <td class="thecolorbordtyb" valign="top" align="right">{{x.precioUnitario}}</td>
+                                <td class="thecolorbordtyb" valign="top" align="right">{{x.precio}}</td>
+                            </tr>
+                            <tr height="6%">
+                                <td colspan="2" class="bordrii thecolorbord"></td>
+                                <td align="center" class="thecolorbord"><b
+                                        style="font-family:arial;font-size:14px;">TOTAL</b></td>
+                                <td align="center" class="bordrri thecolorbord">
+                                    <b>
+                                        <div class="wrapper">
+                                            <div class="left"><b>Q</b></div>
+                                            <div class="right">
+                                                <span id="spTotal">{{grantotal}}</span>
+                                            </div>
+                                        </div>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="qr">
+                                        <tr>
+                                            <td align="center">
+                                                <table>
+                                                    <tr>
+                                                        <td align="center"><label width="90" id="qrcode"
+                                                                style="margin-top:15px;"></label></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                    </table><br>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span id="spregimen">{{regimen1}}</span><br><span>{{regimen2}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span id="spguid"></span>{{"Autorización: "+numbAut}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span id="spcerti"></span>{{nombreCert+" Nit: "+nitCert}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span id="spcerti"></span>Supported by www.posfile.com</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="thecolorbord bordrc"><span id="piefact">{{textopieF}}</span></td>
+                            </tr>
+                            <tr>
+                                <span>{{codigoQR}}</span>
+                                <td align="right"><img id="logofel"
+                                        src="http://system.posfile.com/app-assets/images/logo/logofel.png"
+                                        alt="logo fel" height="40px"></td>
+                            </tr>
+                        </table>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var element = document.getElementById("pages");
+        var ticket = document.getElementById("ticket");
+        var boton1 = document.getElementById("labelc1");
+        var boton2 = document.getElementById("labelc2");
+        var check1 = document.getElementById("botonFormat");
+        var check2 = document.getElementById("botonFormat2");
+        window.addEventListener('load', init, false);
+        function init() {
+            element.style.display = 'none';
+            ticket.style.display = 'none';
+            boton2.classList.add('btn-default');
+            boton1.classList.add('btn-default');
+            boton2.classList.remove('btn-primary');
+            boton1.classList.remove('btn-primary');
+        }
+        function verificar() {
+            if (codigoQR) {
+                crearQR();
+            }
+
+            if (check2.checked) {
+                boton2.classList.add('btn-primary');
+                boton1.classList.add('btn-default');
+                boton2.classList.remove('btn-default');
+                boton1.classList.remove('btn-primary');
+                check1.checked = false;
+                element.style.display = 'inline-block ';
+                ticket.style.display = 'none';
+            } else {
+                if (check1.checked) {
+                    boton2.classList.add('btn-default');
+                    boton1.classList.add('btn-primary');
+                    boton2.classList.remove('btn-primary');
+                    boton1.classList.remove('btn-default');
+                    check2.checked = false;
+                    element.style.display = 'none';
+                    ticket.style.display = 'inline-block';
+                }
+            }
+        }
+        var qrcode = new QRCode(document.getElementById('qrcode'));
+        function crearQR() {
+            var data = codigoQR;
+            qrcode.makeCode(data);
+        }
+        function imprimirElemento(elemento) {
+            var ventana = window.open('', 'PRINT', 'width:1000px,height:1000px');
+            ventana.document.write('<html><head> <link rel="stylesheet" href="estilos.css"><link rel="stylesheet" href="style.css"><title>' + document.title + '</title>');
+            ventana.document.write('</head><body >');
+            ventana.document.write(elemento.innerHTML);
+            ventana.document.write('</body></html>');
+            ventana.document.close();
+            ventana.focus();
+            ventana.print();
+            ventana.close();
+            return true;
+        }
+
+        document.querySelector("#btnImprimir").addEventListener("click", function () {
+            var div = document.querySelector("#imprimible");
+            imprimirElemento(div);
+        });
+        $(document).ready(function () {
+            var e = document.getElementById("fila1");
+            var height = $(window).height() - e.clientHeight;
+            console.log("total de altura" + height)
+            $('#fila2').height(height);
+        });
+    </script>
+</body>
+
+</html>

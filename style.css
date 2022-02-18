@@ -1,0 +1,227 @@
+* {
+    font-size: 13px;
+    font-weight: 450;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+}
+/* bordes */
+.thecolorbord,.thecolorbordright,.thecolorbordleft,.thecolorini{
+    border: 1px solid rgb(0, 0, 0);
+}
+.thecolorbordonlyl{
+    border-left: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+}
+.thecolorbordtyb{
+    border-right: 1px solid rgb(0, 0, 0);
+}
+.border-all-2{
+    padding:5px 0px;
+    border-radius:5px 5px 5px 5px;
+}
+.bordertop-left{
+    color:white;
+    padding:5px 0px;
+    border-radius:5px 0px 0px 0px;
+    -webkit-print-color-adjust: exact;
+}
+.border-line{
+    color:white;
+    padding:5px 0px;
+    -webkit-print-color-adjust: exact;
+}
+.border-all{
+    color:white;
+    padding:5px 0px;
+    border-radius:5px 5px 5px 5px;
+    -webkit-print-color-adjust: exact;
+}
+.bordertop-rigth{
+    color:white;
+    padding:5px 0px;
+    border-radius:0px 5px 0px 0px;
+    -webkit-print-color-adjust: exact;
+}
+.bordrii{
+    border-radius: 0px 0px 0px 5px;
+}
+.bordrri{
+    border-radius: 0px 0px 5px 0px; 
+}
+.bordrc{
+    border-radius: 5px 5px 5px 5px; 
+}
+
+/* Orientacion- alineacion*/
+.left{
+    width:20%;
+    left:0;
+    position:absolute;
+}
+.right{
+    right:0;
+}
+.hcenter {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+td.producto,
+th.producto {
+    width: 85px;
+    max-width: 85px;
+}
+td.cantidad,
+th.cantidad {
+    width: 40px;
+    max-width: 40px;
+    word-break: break-all;
+}
+td.precio,
+th.precio {
+    width: 50px;
+    max-width: 50px;
+    word-break: break-all;
+}
+
+.ticket {
+    width: 270px;
+    max-width: 270px;
+}
+@media print {
+    .oculto-impresion,
+    .oculto-impresion * {
+    display: none;
+    }
+    .ver-impresion,
+    .ver-impresion * {
+        box-shadow: 0px 0px 0px #999 !important;
+        display:block !important;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn{
+  display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      
+      border: 1px solid transparent;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      line-height: 1.25;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+     }
+  /*
+  .btn {
+     
+      background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+      background-color:#3d94f6;
+      border-radius:6px;
+      border:1px solid #fff;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Arial;
+      font-size:15px;
+      font-weight:bold;
+      padding:6px 14px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px #1570cd;
+    
+  }
+  */        .thecolorini{
+                background-color: black;
+            }
+            .wrapper{
+                position:relative;
+            }
+            .page {
+            margin: 0;
+            padding: 0.25in;
+           
+            width: 8in;
+            font-family: Arial;
+            font-size: 7.5pt;
+            text-align: left;
+            background: white;
+            }
+            .page_ANULADO {
+            margin: 0;
+            padding: 0.25in;
+            width: 8in;
+            font-family: Arial;
+            font-size: 7.5pt;
+            text-align: left;        
+            background:transparent;
+            background-image:url('https://felgtaws.digifact.com.gt/mx.com.fact.res/logo/watermark_anulada.png');
+            background-repeat: repeat;
+            }
+            table {
+            font-family: Arial;
+            font-size: 7.5pt;
+            text-align: left;
+            background: transparent;
+            }
+            td {
+            vertical-align: top;
+            border-color: #808080;
+            padding-left: 0.02in;
+            padding-right: 0.02in;
+            padding-top: 0.02in;
+            padding-bottom: 0.02in;
+            }
+            
+            hr {
+            height:1px;
+            background-color: #808080;
+            border: 0;
+            width: 100%;
+            color: #808080;
+            }

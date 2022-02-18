@@ -1,0 +1,81 @@
+body{
+    background-color: #eaebf1;
+        height:100%;
+        margin:0;
+        flex-direction: column;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+#imprimible{
+    width: 100%;
+    height: 70%;
+    overflow: scroll;
+}
+#desborde{
+    overflow: auto;
+}
+.sombra{
+    box-shadow: 2px 0px 5px #999;
+    border-radius: 4px 4px 4px 4px;
+    background-color: white;
+}
+input{
+    display: none;
+}
+
+.encabezado{
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.botones{
+    background-color: white;
+    height:100%;
+}
+
+.vista{
+    background-color: white;
+    height:100%;
+    width: 100%;
+}
+.carta{
+    overflow-x: inherit;
+}
+
+.iconos{
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+}
+.etiquetas{
+    display: inline;
+    font-size: 5px;
+}
+.titulo{
+    margin: 20px;
+    color:  #4cb1a9;
+    text-align: center;
+    font-size: large;
+}
+.titulo4{
+    margin: 20px;
+    color:  #535353;
+    text-align: center;
+    font-size:small;
+}
+.prueba{
+height: 100%;
+background-color: green;
+}
+
+
+.transparente{
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
+}
+.centrado {
+    text-align: center;
+    align-content: center;
+}
